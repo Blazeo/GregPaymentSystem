@@ -45,13 +45,18 @@ public class PaymentSystem {
 			if (!SAVE_DIR.exists()) {
 				System.out.println("No save folder found...");
 				return;
-			}
-			
+			}			
 			fis = new FileInputStream(SAVE_FILE);
 			ois = new ObjectInputStream(fis);
 			employees = (List<Employee>) ois.readObject();
-			lastId = employees.size()-1;
+			for (Employee employee : employees) {
+				if(lastId< employee.getEmployeeId())
+				{
+					lastId = employee.getEmployeeId();
+				}
+			}
 			System.out.println("Loaded " + employees.size() + " employees...");
+			System.out.println("Loaded last employee id is" + lastId);
 			fis.close();
 			ois.close();
 			
