@@ -38,18 +38,23 @@ public class PaymentSystem {
 	}
 
 	private void loadData() {
+		ObjectInputStream ois;
+		FileInputStream fis;
 		System.out.println("Loading employee records from.. "+SAVE_FILE.toString());
 		try {
 			if (!SAVE_DIR.exists()) {
 				System.out.println("No save folder found...");
 				return;
 			}
-			FileInputStream fis;
+			
 			fis = new FileInputStream(SAVE_FILE);
-			ObjectInputStream ois = new ObjectInputStream(fis);
+			ois = new ObjectInputStream(fis);
 			employees = (List<Employee>) ois.readObject();
 			lastId = employees.size()-1;
 			System.out.println("Loaded " + employees.size() + " employees...");
+			fis.close();
+			ois.close();
+			
 		} catch (Exception any) {
 			System.err.println("loadData has failed with :"+any.getCause());
 		}
@@ -58,6 +63,8 @@ public class PaymentSystem {
 
 	private void saveData() {
 		System.out.println("Saving employee records to.. "+SAVE_FILE.toString());
+		FileOutputStream fout;
+		ObjectOutputStream oos;
 		try {
 			// if the directory does not exist, create it
 			if (!SAVE_DIR.exists()) {
@@ -65,11 +72,14 @@ public class PaymentSystem {
 				SAVE_DIR.mkdir();
 				System.out.println("DIR created");
 			}
-			FileOutputStream fout = new FileOutputStream(SAVE_FILE, false);
-			ObjectOutputStream oos = new ObjectOutputStream(fout);
+			fout = new FileOutputStream(SAVE_FILE, false);
+			oos = new ObjectOutputStream(fout);
 			oos.writeObject(employees);
 			System.out
 					.println(employees.size() + " employees data has saved..");
+			
+			fout.close();
+			oos.close();
 		} catch (Exception any) {
 			System.err.println("saveData has failed with :"+any.getCause());
 		}
