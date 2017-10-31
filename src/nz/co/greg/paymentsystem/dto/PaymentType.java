@@ -1,6 +1,8 @@
 package nz.co.greg.paymentsystem.dto;
 
-public abstract class PaymentType {
+import java.io.Serializable;
+
+public abstract class PaymentType implements Serializable{
 	protected int paymentAmount;
 	
 	public int calculatePayment(int hours) throws Exception {

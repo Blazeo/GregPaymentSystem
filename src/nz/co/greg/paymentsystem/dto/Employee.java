@@ -32,4 +32,10 @@ public class Employee implements Serializable {
 			return 0;
 		}
 	}
+	@Override
+	public String toString() {
+		return "[Employee id:"+employeeId+", payment type:{"+paymentType.toString()+"}]" ;
+	}
+	
+	
 }

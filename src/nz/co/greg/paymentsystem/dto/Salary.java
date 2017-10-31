@@ -3,7 +3,6 @@ package nz.co.greg.paymentsystem.dto;
 public class Salary extends PaymentType {
 	public Salary(int Salary) {
 		paymentAmount = Salary;
-
 	}
 
 	private int getHourRate() {
@@ -12,7 +11,11 @@ public class Salary extends PaymentType {
 
 	@Override
 	public int calculatePayment(int hours) throws Exception {
-
 		return getHourRate() * hours;
+	}
+	
+	@Override
+	public String toString() {
+		return "Salary:"+paymentAmount;
 	}
 }

@@ -4,14 +4,16 @@ public class SalaryWithCommission extends Salary {
 	private int commission;
 	public SalaryWithCommission(int salary, int commission) {
 		super(salary);
-		this.commission=commission;
-		
-		
+		this.commission=commission;		
 	}
 
 	@Override
 	public int calculatePayment(int hours) throws Exception {
-
 		return super.calculatePayment(hours)+commission;
+	}
+	
+	@Override
+	public String toString() {
+		return "Salary:"+paymentAmount+", commission:"+commission;
 	}
 }

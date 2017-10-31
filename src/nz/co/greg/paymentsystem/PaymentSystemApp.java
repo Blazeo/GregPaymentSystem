@@ -24,14 +24,14 @@ public class PaymentSystemApp {
 		PaymentSystem paymentSystem = new PaymentSystem();
 		System.out.println("Initializing PaymentSystem...");
 		paymentSystem.init();
-		boolean run = true;
 		System.out.println("***************************************");
 		System.out.println("******Greg's Payment Syetem V1.0*******");
 		System.out.println("***************************************");
-		run = runApp(paymentSystem, run);
+		runApp(paymentSystem);
 	}
 
-	private static boolean runApp(PaymentSystem paymentSystem, boolean run) {
+	private static void runApp(PaymentSystem paymentSystem) {
+		boolean run =true;
 		while (run) {
 			System.out.println("             Menu");
 			System.out.println("1. Add employee");
@@ -43,7 +43,8 @@ public class PaymentSystemApp {
 				paymentSystem.addEmployee(getPaymentTypeFromUser());
 				break;
 			case PRINT_REPORT:
-				System.out.println(paymentSystem.createReport());
+				int hours = getPositiveNo("How many hours in this week: ");
+				System.out.println(paymentSystem.createReport(hours));
 				break;
 			case EXIT:
 				run = false;
@@ -54,7 +55,6 @@ public class PaymentSystemApp {
 				break;
 			}
 		}
-		return run;
 	}
 
 	private static PaymentType getPaymentTypeFromUser() {
